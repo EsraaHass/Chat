@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void showMassege(BuildContext context, String message,
+void showMassegeDialog(BuildContext context, String message,
     {String? positiveActionName,
     VoidCallback? positiveAction,
     String? negativeActionName,
