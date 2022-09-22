@@ -1,7 +1,10 @@
 import 'package:chat/firebase_options.dart';
-import 'package:chat/presentation_layer/login/login.dart';
-import 'package:chat/presentation_layer/register/register.dart';
-import 'package:chat/presentation_layer/theme.dart';
+import 'package:chat/view/login/login.dart';
+import 'package:chat/view/register/register.dart';
+import 'package:chat/view/screens/AddRoom.dart';
+import 'package:chat/view/screens/Chat.dart';
+import 'package:chat/view/screens/home_screen.dart';
+import 'package:chat/view/shared/constant/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +25,9 @@ class MyApp extends StatelessWidget {
       routes: {
         Register.routeName: (_) => Register(),
         Login.routeName: (_) => Login(),
+        HomeScreen.routeName: (_) => HomeScreen(),
+        AddRoom.routeName: (_) => AddRoom(),
+        Chat.routeName: (_) => Chat(),
       },
       theme: MyTheme.lightTheme,
     );
