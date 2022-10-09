@@ -32,19 +32,27 @@ class SendMessag extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(24),
                     topLeft: Radius.circular(24),
                     bottomLeft: Radius.circular(24),
                   )),
               child: Text(
                 content,
-                style: TextStyle(color: Colors.white),
+                textDirection: TextDirection.rtl,
+                style: const TextStyle(color: Colors.white),
               )),
-          Text('${FormateDate.formatMessageDate(dateTime)}')
+          Text(
+            textDirection: TextDirection.ltr,
+            '${FormateDate.formatMessageDate(dateTime)}',
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                ?.copyWith(fontSize: 11, color: Colors.grey.shade600),
+          ),
         ],
       ),
     );
@@ -66,20 +74,46 @@ class RecivedMessag extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            senderName,
+            style: const TextStyle(
+                fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
+          ),
+          const SizedBox(
+            height: 3,
+          ),
           Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                  color: Color(0XFFF8F8F8),
+              padding: const EdgeInsets.all(12),
+              decoration: const BoxDecoration(
+                  color: const Color(0XFFF8F8F8),
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(24),
-                    topLeft: Radius.circular(24),
-                    bottomLeft: Radius.circular(24),
+                    topLeft: const Radius.circular(24),
+                    bottomLeft: const Radius.circular(24),
                   )),
-              child: Text(
-                content,
-                style: TextStyle(color: Color(0XFF787993)),
+              child: Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      content,
+                      textDirection: TextDirection.ltr,
+                      style: const TextStyle(color: const Color(0XFF787993)),
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      textDirection: TextDirection.ltr,
+                      '${FormateDate.formatMessageDate(dateTime)}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          ?.copyWith(fontSize: 11, color: Colors.grey.shade600),
+                    )
+                  ],
+                ),
               )),
-          Text('${FormateDate.formatMessageDate(dateTime)}')
         ],
       ),
     );

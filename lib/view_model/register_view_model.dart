@@ -1,5 +1,5 @@
 import 'package:chat/model/my_user.dart';
-import 'package:chat/network/local/database.dart';
+import 'package:chat/repository/repository.dart';
 import 'package:chat/view/base/base.dart';
 import 'package:chat/view/shared/constant/shared_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +10,9 @@ abstract class RegisterNavigator extends BaseNavigator {
 
 class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
   FirebaseAuth auth = FirebaseAuth.instance;
+  Repository? repository;
+
+  RegisterViewModel({this.repository});
 
   void creatAccount(
       String email, String password, String firstName, String lastName) async {
@@ -22,7 +25,9 @@ class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
           firstName: firstName,
           lastName: lastName,
           email: email);
-      var insertedUser = await MyDatabase.insertUser(myUser);
+
+      var insertedUser = await repository?.insertUser(myUser);
+
       navigator?.hideLoading();
       if (insertedUser != null) {
         SharedData.myUser = insertedUser;
@@ -31,7 +36,6 @@ class RegisterViewModel extends BaseViewModel<RegisterNavigator> {
         navigator
             ?.showMessage('something went wrong with username or password');
       }
-      // navigator?.showMessage(cerdintial.user?.email ?? '');
     } on FirebaseAuthException catch (e) {
       navigator?.hideLoading();
       if (e.code == 'weak-password') {

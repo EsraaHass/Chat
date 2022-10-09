@@ -1,3 +1,4 @@
+import 'package:chat/repository/repository_impl.dart';
 import 'package:chat/view/base/base.dart';
 import 'package:chat/view/register/checkEmailValid.dart';
 import 'package:chat/view/register/register.dart';
@@ -23,7 +24,7 @@ class _LoginState extends BaseState<Login, LoginViewModel>
 
   @override
   LoginViewModel initViewModel() {
-    return LoginViewModel();
+    return LoginViewModel(repository: ChatRepository());
   }
 
   @override
@@ -81,8 +82,8 @@ class _LoginState extends BaseState<Login, LoginViewModel>
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                          fontSize: 14,
-                                          color: Color(0xFF797979))),
+                                      fontSize: 14,
+                                      color: Color(0xFF797979))),
                             ),
                             TextFormField(
                               cursorColor: Colors.black,
@@ -103,8 +104,8 @@ class _LoginState extends BaseState<Login, LoginViewModel>
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                          fontSize: 14,
-                                          color: Color(0xFF797979))),
+                                      fontSize: 14,
+                                      color: Color(0xFF797979))),
                             ),
                           ],
                         ),

@@ -1,6 +1,6 @@
 import 'package:chat/model/message.dart';
 import 'package:chat/model/my_room.dart';
-import 'package:chat/network/local/database.dart';
+import 'package:chat/repository/repository_impl.dart';
 import 'package:chat/view/base/base.dart';
 import 'package:chat/view/screens/chat_widget.dart';
 import 'package:chat/view_model/Chat_viewModel.dart';
@@ -22,14 +22,11 @@ class _ChatState extends BaseState<Chat, ChatViewModel>
 
   @override
   ChatViewModel initViewModel() {
-    return ChatViewModel();
+    return ChatViewModel(repository: ChatRepository());
   }
 
-  // @override
-  //  void initState() {
-  //    super.initState();
-  //    viewModel.navigator = this ;
-  //  }
+  // ChatViewModel chatViewModel = ChatViewModel(repository: ChatRepository());
+
   @override
   Widget build(BuildContext context) {
     myRoom = ModalRoute.of(context)?.settings.arguments as MyRoom;
@@ -62,9 +59,13 @@ class _ChatState extends BaseState<Chat, ChatViewModel>
               children: [
                 Expanded(
                     child: StreamBuilder<QuerySnapshot<Message>>(
-                  stream: MyDatabase.getMessageCollection(myRoom.id ?? '')
+                  //MyDatabase.getMessageCollection(myRoom.id ?? '')
+                  stream: initViewModel()
+                      .repository
+                      ?.getMessageCollection(myRoom.id ?? '')
                       .orderBy('dateTime', descending: false)
                       .snapshots(),
+
                   builder: (buildContext, asyncSnapshot) {
                     if (asyncSnapshot.hasError) {
                       return Center(
@@ -85,7 +86,9 @@ class _ChatState extends BaseState<Chat, ChatViewModel>
                                       MaterialStateProperty.all<Color>(
                                           Colors.blue)),
                               onPressed: () {
-                                MyDatabase.getMessageCollection(myRoom.id ?? '')
+                                initViewModel()
+                                    .repository
+                                    ?.getMessageCollection(myRoom.id ?? '')
                                     .doc()
                                     .snapshots();
                               },

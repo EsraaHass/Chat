@@ -1,8 +1,8 @@
+import 'package:chat/repository/repository.dart';
 import 'package:chat/view/base/base.dart';
 import 'package:chat/view/shared/constant/shared_data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../network/local/database.dart';
 
 abstract class LoginNavigator extends BaseNavigator {
   void goToHome();
@@ -10,6 +10,9 @@ abstract class LoginNavigator extends BaseNavigator {
 
 class LoginViewModel extends BaseViewModel<LoginNavigator> {
   var authServices = FirebaseAuth.instance;
+  Repository? repository;
+
+  LoginViewModel({this.repository});
 
   void login(String email, String password) async {
     navigator?.showLoading();
@@ -18,11 +21,12 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
           email: email, password: password);
 
       var retriveUser =
-          await MyDatabase.retriveUserById(cerdintial.user?.uid ?? '');
+          await repository?.retriveUserById(cerdintial.user?.uid ?? '');
+
       navigator?.hideLoading();
       if (retriveUser == null) {
-        navigator
-            ?.showMessage('something went wrong with username or password');
+        navigator?.showMessage('something went wrong with username or password',
+            positiveActionName: 'ok');
       } else {
         SharedData.myUser = retriveUser;
         navigator?.goToHome();

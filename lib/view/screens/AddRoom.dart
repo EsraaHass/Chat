@@ -1,3 +1,4 @@
+import 'package:chat/repository/repository_impl.dart';
 import 'package:chat/view/base/base.dart';
 import 'package:chat/view_model/AddRoom_viewModel.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _AddRoomState extends BaseState<AddRoom, AddRoomViewModel>
 
   @override
   AddRoomViewModel initViewModel() {
-    return AddRoomViewModel();
+    return AddRoomViewModel(repository: ChatRepository());
   }
 
   @override
@@ -94,8 +95,8 @@ class _AddRoomState extends BaseState<AddRoom, AddRoomViewModel>
                                     .textTheme
                                     .bodySmall
                                     ?.copyWith(
-                                        fontSize: 16,
-                                        color: const Color(0xFF797979))),
+                                    fontSize: 16,
+                                    color: const Color(0xFF797979))),
                           ),
                           const SizedBox(
                             height: 16,
@@ -148,8 +149,8 @@ class _AddRoomState extends BaseState<AddRoom, AddRoomViewModel>
                                     .textTheme
                                     .bodySmall
                                     ?.copyWith(
-                                        fontSize: 16,
-                                        color: const Color(0xFF797979))),
+                                    fontSize: 16,
+                                    color: const Color(0xFF797979))),
                           ),
                         ],
                       ),

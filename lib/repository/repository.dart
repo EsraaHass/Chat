@@ -1,15 +1,25 @@
 import 'package:chat/model/message.dart';
 import 'package:chat/model/my_room.dart';
 import 'package:chat/model/my_user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class Repository {
-  Future<void> createRoom(MyRoom myRoom);
 
-  Future<void> sendMessageToAnother(MyRoom myRoom, Message message);
+   CollectionReference<MyUser> getUserCollection();
 
-  Future<List<MyRoom>> getRooms(List<MyRoom> rooms);
+  Future<MyUser?> insertUser(MyUser myUser);
 
-  Future<MyUser?> login(String id);
+  Future<void> deleteRoom(MyRoom myRoom);
 
-  register(MyUser myUser);
+  Future<MyUser?> retriveUserById(String id);
+
+  CollectionReference<MyRoom> getRoomCollection();
+
+  Future<void> insertRoom(MyRoom myRoom);
+
+  Stream<QuerySnapshot<MyRoom>> loadRooms();
+
+  CollectionReference<Message> getMessageCollection(String roomId);
+
+  Future<void> sendMessage(String roomId, Message message);
 }

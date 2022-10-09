@@ -1,3 +1,4 @@
+import 'package:chat/repository/repository_impl.dart';
 import 'package:chat/view/base/base.dart';
 import 'package:chat/view/login/login.dart';
 import 'package:chat/view/register/buildTextFormField.dart';
@@ -28,7 +29,7 @@ class _RegisterState extends BaseState<Register, RegisterViewModel>
 
   @override
   RegisterViewModel initViewModel() {
-    return RegisterViewModel();
+    return RegisterViewModel(repository: ChatRepository());
   }
 
   @override
@@ -91,8 +92,8 @@ class _RegisterState extends BaseState<Register, RegisterViewModel>
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                          fontSize: 14,
-                                          color: Color(0xFF797979))),
+                                      fontSize: 14,
+                                      color: Color(0xFF797979))),
                             ),
                             TextFormField(
                               cursorColor: Colors.black,
@@ -113,8 +114,8 @@ class _RegisterState extends BaseState<Register, RegisterViewModel>
                                       .textTheme
                                       .bodySmall
                                       ?.copyWith(
-                                          fontSize: 14,
-                                          color: Color(0xFF797979))),
+                                      fontSize: 14,
+                                      color: Color(0xFF797979))),
                             ),
                             // SizedBox(height: size*.25,),
                           ],
