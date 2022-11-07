@@ -59,7 +59,6 @@ class _ChatState extends BaseState<Chat, ChatViewModel>
               children: [
                 Expanded(
                     child: StreamBuilder<QuerySnapshot<Message>>(
-                  //MyDatabase.getMessageCollection(myRoom.id ?? '')
                   stream: initViewModel()
                       .repository
                       ?.getMessageCollection(myRoom.id ?? '')

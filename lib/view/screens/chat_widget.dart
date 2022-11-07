@@ -27,7 +27,7 @@ class SendMessag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 70, right: 8, top: 8, bottom: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -70,7 +70,7 @@ class RecivedMessag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8, right: 70, top: 8, bottom: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -91,28 +91,26 @@ class RecivedMessag extends StatelessWidget {
                     topLeft: const Radius.circular(24),
                     bottomLeft: const Radius.circular(24),
                   )),
-              child: Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      content,
-                      textDirection: TextDirection.ltr,
-                      style: const TextStyle(color: const Color(0XFF787993)),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      textDirection: TextDirection.ltr,
-                      '${FormateDate.formatMessageDate(dateTime)}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.copyWith(fontSize: 11, color: Colors.grey.shade600),
-                    )
-                  ],
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    content,
+                    textDirection: TextDirection.rtl,
+                    style: const TextStyle(color: const Color(0XFF787993)),
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    textDirection: TextDirection.ltr,
+                    '${FormateDate.formatMessageDate(dateTime)}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        ?.copyWith(fontSize: 11, color: Colors.grey.shade600),
+                  )
+                ],
               )),
         ],
       ),

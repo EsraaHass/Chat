@@ -50,16 +50,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: StreamBuilder<QuerySnapshot<MyRoom>>(
               stream: ChatRepository().loadRooms(),
               builder: (buildcontext, snapshot) {
-                var data = snapshot.data!.docs.map((e) => e.data()).toList();
+                var data = snapshot.data?.docs.map((e) => e.data()).toList();
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 12,
                       crossAxisSpacing: 12),
                   itemBuilder: (_, index) {
-                    return RoomWidget(data[index]);
+                    return RoomWidget(data![index]);
                   },
-                  itemCount: data.length,
+                  itemCount: data?.length ?? 0,
                 );
               },
             ))
